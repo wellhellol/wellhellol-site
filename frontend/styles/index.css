@@ -1,16 +1,36 @@
 :root {
-  --board: #f4f7f5;
-  --paper: #ffffff;
-  --ink: #17403d;
-  --soft: #4f6e6a;
-  --line: #b8cfcb;
-  --card-edge: #cfdcd9;
+  /* wellhellol P5 Playful */
+  --periwinkle: #8aa8f2;
+  --chartreuse: #e4f27a;
+  --lavender: #cdbdf0;
+  --blush: #f4c3d9;
+  --peach: #f8c9a0;
+  --mint: #b5e6d3;
+  --sea-glass: #7cc4b8;
+  --graphite: #24262b;
+  --paper-bg: #f6f7fb;
 
-  /* Lime highlighter, with lime and cornflower tape */
-  --hl: #e4f27a;
-  --tape-1: #e4f27a;
-  --tape-2: #8aa8f2;
-  --link: #2f8f82;
+  /* 60% tints for large surfaces */
+  --periwinkle-tint: #d0dcfa;
+  --chartreuse-tint: #f4faca;
+  --lavender-tint: #ebe5f9;
+  --blush-tint: #fbe7f0;
+  --peach-tint: #fce9d9;
+  --mint-tint: #e1f5ed;
+  --sea-glass-tint: #cbe7e3;
+
+  --board: var(--paper-bg);
+  --paper: #ffffff;
+  --ink: var(--graphite);
+  --soft: #5d6168;
+  --line: #c9d2ea;
+  --card-edge: #dde2ef;
+
+  /* Chartreuse highlighter, with chartreuse and periwinkle tape */
+  --hl: var(--chartreuse);
+  --tape-1: var(--chartreuse);
+  --tape-2: var(--periwinkle);
+  --link: var(--periwinkle);
 
   --font: "Atkinson Hyperlegible Next", system-ui, sans-serif;
   --page: 64rem;
@@ -187,7 +207,7 @@ section > h2 {
   margin-bottom: 0;
 }
 
-/* A strip of tape holding each card up, alternating lime and cornflower */
+/* A strip of tape holding each card up, alternating chartreuse and periwinkle */
 .card::before {
   content: "";
   position: absolute;
@@ -336,3 +356,109 @@ blockquote {
   max-width: 40rem;
   margin-top: 1.5rem;
 }
+
+/* Color: every accent gets a turn.
+   Full-strength colors for small marks (tape, highlighter, rules);
+   tints for big surfaces (cards, quotes). */
+
+/* A stripe of the whole palette across the top of the page */
+body {
+  border-top: 0.6rem solid;
+  border-image: linear-gradient(
+      90deg,
+      var(--periwinkle) 0 14.28%,
+      var(--chartreuse) 0 28.57%,
+      var(--lavender) 0 42.85%,
+      var(--blush) 0 57.14%,
+      var(--peach) 0 71.42%,
+      var(--mint) 0 85.71%,
+      var(--sea-glass) 0
+    )
+    1;
+}
+
+/* Section headings take turns with the highlighter */
+main > section:nth-of-type(6n + 2) > h2 .hl { background: var(--periwinkle-tint); }
+main > section:nth-of-type(6n + 3) > h2 .hl { background: var(--blush); }
+main > section:nth-of-type(6n + 4) > h2 .hl { background: var(--mint); }
+main > section:nth-of-type(6n + 5) > h2 .hl { background: var(--peach); }
+main > section:nth-of-type(6n + 6) > h2 .hl { background: var(--lavender); }
+
+.audiences > div:nth-child(1) .audience-title .hl { background: var(--lavender-tint); }
+.audiences > div:nth-child(2) .audience-title .hl { background: var(--peach-tint); }
+
+/* Cards: white paper, tape in a rotating color */
+.card:nth-child(6n + 1)::before { background: var(--chartreuse); }
+.card:nth-child(6n + 2)::before { background: var(--periwinkle); }
+.card:nth-child(6n + 3)::before { background: var(--blush); }
+.card:nth-child(6n + 4)::before { background: var(--sea-glass); }
+.card:nth-child(6n + 5)::before { background: var(--peach); }
+.card:nth-child(6n + 6)::before { background: var(--lavender); }
+
+/* Work history: a colored rule over each job */
+.job { border-top: 0.35rem solid var(--periwinkle); }
+.job:nth-child(6n + 2) { border-top-color: var(--blush); }
+.job:nth-child(6n + 3) { border-top-color: var(--mint); }
+.job:nth-child(6n + 4) { border-top-color: var(--peach); }
+.job:nth-child(6n + 5) { border-top-color: var(--lavender); }
+.job:nth-child(6n + 6) { border-top-color: var(--sea-glass); }
+
+/* Quotes on tinted cards with a big colored quote mark */
+.quotes figure {
+  position: relative;
+  padding: 1.75rem 1.5rem 1.25rem;
+  background: var(--lavender-tint);
+  transform: rotate(0.5deg);
+}
+
+.quotes figure:nth-child(even) {
+  background: var(--mint-tint);
+  transform: rotate(-0.6deg);
+}
+
+.quotes figure::before {
+  content: "";
+  position: absolute;
+  top: -0.7rem;
+  left: 1.5rem;
+  width: 5.5rem;
+  height: 1.3rem;
+  background: var(--blush);
+  opacity: 0.85;
+  transform: rotate(-3deg);
+}
+
+.quotes figure:nth-child(even)::before {
+  background: var(--chartreuse);
+  transform: rotate(3deg);
+}
+
+/* Call to action: periwinkle button, chartreuse on hover */
+.cta {
+  background: var(--periwinkle);
+  color: var(--ink);
+  border-radius: 0.2rem;
+  box-shadow: 0.25rem 0.25rem 0 var(--ink);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.cta:hover {
+  background: var(--chartreuse);
+  transform: translate(-0.1rem, -0.1rem);
+  box-shadow: 0.35rem 0.35rem 0 var(--ink);
+}
+
+/* Steps: numbered with colored dots */
+.steps li::marker {
+  color: var(--ink);
+}
+
+.steps li:nth-child(6n + 1)::marker { color: var(--periwinkle); }
+.steps li:nth-child(6n + 2)::marker { color: var(--sea-glass); }
+.steps li:nth-child(6n + 3)::marker { color: var(--blush); }
+.steps li:nth-child(6n + 4)::marker { color: var(--peach); }
+.steps li:nth-child(6n + 5)::marker { color: var(--lavender); }
+
+/* Footer links pick up accent underlines */
+.bottom a:nth-child(1) { text-decoration-color: var(--blush); }
+.bottom a:nth-child(2) { text-decoration-color: var(--mint); }
